@@ -5,9 +5,21 @@ import { errorHandler } from './middleware/errorHandler.js'
 
 const app = express()
 
+const allowedOrigins = (process.env.FRONTEND_ORIGIN || 'http://localhost:5173')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter((origin) => origin && origin !== '*')
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_ORIGIN || '*'
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true)
+        return
+      }
+
+      callback(new Error('Origin is not allowed by CORS.'))
+    }
   })
 )
 app.use(express.json())
