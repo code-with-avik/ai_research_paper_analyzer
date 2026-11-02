@@ -1,0 +1,25 @@
+# Environment & Secrets
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+env/
+.venv/
+*.tsbuildinfo
+.pytest_cache/
+.mypy_cache/
+
+# Next.js / Node
+node_modules/
+.next/
+/.next-production/
+dist/
+build/
+.turbo/
+
+# OS files
+.DS_Store
+Thumbs.db
